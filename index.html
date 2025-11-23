@@ -1,0 +1,199 @@
+<html>
+ <head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>躲小球</title>
+ </head>
+ <body>
+  <style>
+    canvas{
+      background-color:#006EFF;
+      width:300px;
+      height:300px;
+      }
+    button{
+      position:relative;
+      border:0.05px solid red;
+      background-color:#ffffff;
+      }
+    *{
+      user-select:none;
+      }
+    .b{
+      width:30px;
+      height:30px;
+      }
+    </style>
+  <div>
+  <b><p id="fs" style="position:absolute;left:12px;top:-8px;color:yellow;"></p></b>
+  <b><p id="zgfs" style="position:absolute;color:yellow;"></p></b>
+  <b><p id="bcdf" style="position:absolute;color:yellow;top:30;"></p></b>
+  <canvas id="ck" width="400" height="400"></canvas>
+  </div>
+  <button id="ks" style="display:block;" onclick="if(yx){yx=false;document.getElementById('ks').innerHTML='开始游戏'} else{yx=true;document.getElementById('ks').innerHTML='暂停游戏';if(dr.length===0){creat();x=200;y=200;document.getElementById('zgfs').innerHTML='';document.getElementById('bcdf').innerHTML=''}}">开始游戏</button>
+  <div id="kz" style="background-color:red;display:inline-block;position:absolute;left:200;top:300;border:1px solid;">
+   <button style="left:41px;margin:3px;" id="gfp">↑</button><br> <button style="margin:3px;" id="gfb">←</button> <button style="margin:3px;" id="gfq">↓</button> <button style="margin:3px;" id="gfd">→</button>
+  </div>
+  <div>
+  <button class="b" onclick="if(dx<290){dx+=10}">+</button> <button class="b" onclick="if(dx>120){dx-=10}">-</button>
+  </div>
+  <button id="diy" onclick="if(diyy){diyy=false;document.getElementById('diy').innerHTML='自定义按钮位置:off'} else{diyy=true;document.getElementById('diy').innerHTML='自定义按钮位置:on'}">自定义按钮位置:off</button>
+  <div>
+  调节:<input id="nd" type="number" value="0.25" style="user-select:none;"/><input type="submit" value="ok" onclick="shez();"/>
+  </div>
+  <p id="cs"></p>
+  <div style="position:absolute;top:425;">
+  <i><p style="color:aqua;">感谢游玩(≧∇≦)<br><strong>game by Mr.Liu</strong></p></i>
+  </div>
+  <script>
+  function randomint(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function shez(){
+  ndd=document.getElementById("nd").value
+}
+  class drc{
+    constructor(){
+      this.dx=randomint(0,400)
+      this.dy=randomint(0,100)
+      this.ds=0
+      }
+    }
+  function creat(){
+  dr.push(new drc())
+  }
+  let ndd=0.25
+  let diyy=false
+  let yx=false
+  let dr=[]
+  qqqq=document.getElementById("gfd")
+  qqqq.addEventListener("touchstart",function (){
+      chx = setInterval(() => {xj();
+      },10);
+      });
+  qqqq.addEventListener("touchmove",function(){
+      clearInterval(chx);
+      });
+  qqqq.addEventListener("touchend",function(){
+      clearInterval(chx)
+      })
+  pppp=document.getElementById("gfb")
+  pppp.addEventListener("touchstart",function (){
+      chx1 = setInterval(() => {xjpppp();
+      },10);
+      });
+  pppp.addEventListener("touchmove",function(){
+      clearInterval(chx1);
+      });
+  pppp.addEventListener("touchend",function(){
+      clearInterval(chx1)
+      })
+  qqqq=document.getElementById("gfq")
+  qqqq.addEventListener("touchstart",function (){
+      chx = setInterval(() => {yj();
+      },10);
+      });
+  qqqq.addEventListener("touchmove",function(){
+      clearInterval(chx);
+      });
+  qqqq.addEventListener("touchend",function(){
+      clearInterval(chx)
+      })
+  qqqq=document.getElementById("gfp")
+  qqqq.addEventListener("touchstart",function (){
+      chx = setInterval(() => {yjpppp();
+      },10);
+      });
+  qqqq.addEventListener("touchmove",function(){
+      clearInterval(chx);
+      });
+  qqqq.addEventListener("touchend",function(){
+      clearInterval(chx)
+      })
+  eeee=document.getElementById("ck")
+  c=eeee.getContext("2d")
+  let bc=400
+  let x=bc/2
+  let y=bc/2
+  let cc=0
+  let ccc=0
+  let zg=0
+  let dx=290
+  document.addEventListener("touchmove",function(event){
+   let touch=event.touches[0]
+   let tx=touch.clientX
+   let ty=touch.clientY
+   if(diyy && event.touches.length>0 && ty<window.innerHeight-150 && tx<window.innerWidth-100){
+    document.getElementById("kz").style.left=tx
+    document.getElementById("kz").style.top=ty
+    }
+    })
+  function d(){
+  document.getElementById("ck").style.width=dx
+  document.getElementById("ck").style.height=dx
+  document.getElementById("fs").innerHTML=ccc
+  c.clearRect(0,0,bc,bc)
+  c.fillStyle="rgb(225,105,0)"
+  c.fillRect(x,y,10,10)
+  if(yx){
+  dr.forEach((i) => {
+    jcx=(x+5)-i.dx
+    jcy=(y+5)-i.dy
+    jc=Math.sqrt(jcx**2+jcy**2)
+    if(jc<15){
+    yx=false
+    if(ccc>zg){
+    zg=ccc
+    }
+    document.getElementById("bcdf").innerHTML="本次得分:"+ccc
+    ccc=0
+    dr=[]
+    x=200
+    y=200
+    cc=0
+    document.getElementById("ks").innerHTML="开始游戏"
+    document.getElementById("zgfs").innerHTML="最高得分:"+zg
+    }
+  c.fillStyle="rgb(0,255,0)"
+  c.beginPath()
+  c.arc(i.dx,i.dy,10,0,3.141592653589793*2)
+  c.fill()
+  i.ds+=0.25
+  i.dy+=i.ds+Number(ndd)
+  if(i.dy>410){
+  i.dy=-20
+  i.dx=randomint(0,400)
+  cc+=1
+  i.ds=0
+  if(cc>=ccc){
+  creat()
+  cc=0
+  ccc=ccc+1
+  }
+  }
+    })
+  }
+  setTimeout(d,20);
+  }
+  d()
+  function xj(){
+  if(x<390){
+  x=x+1.3
+  }
+  }
+  function xjpppp(){
+  if(x>0){
+  x=x-1.3
+  }
+  }
+  function yj(){
+  if(y<390){
+  y=y+1.3
+  }
+  }function yjpppp(){
+  if(y>0){
+  y=y-1.3
+  }
+  }
+  </script>
+ </body>
+</html>
